@@ -14,8 +14,12 @@
 <ul class=posts>
     {% for post in posts %}
     <li><h2>{{ post.title }}</h2>{{ post.body|safe }}<br />{{ post.pub_date }}<br /><a href=/reply>reply</a>
+</ul>
+<ul class=replies>
+    {% for reply in replies %}
+    <li>{{ reply.comment|safe }}<br />{{ reply.pub_date }}
     {% else %}
-    <li><em>Unbelievable! No posts here so far.</em>
+    <li><em>No reply here.</em>
     {% endfor %}
 </ul>
 <form action="{{ url_for('add_reply', post_id=post.id) }}" method=post class=add_reply>
@@ -25,10 +29,8 @@
         <dd><input type=submit value=comment>
     </dl>
 </form>
-<ul class=replies>
-    {% for reply in replies %}
-    <li>{{ reply.comment|safe }}<br />{{ reply.pub_date }}
     {% else %}
-    <li><em>No reply here.</em>
+    <li><em>Unbelievable! No posts here so far.</em>
     {% endfor %}
+</ul>
 {% endblock %}
