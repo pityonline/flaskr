@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.logged_in %}
+<form action="{{ url_for('add_post') }}" method=post class=add_post>
+    <dl>
+        <dt>Title: </dt>
+        <dd><input type=text size=30 name=title>
+        <dt>Text: </dt>
+        <dd><textarea name=text rows=5 cols=40></textarea>
+        <dd><input type=submit value=share>
+    </dl>
+</form>
+{% endif %}
+<ul class=posts>
+    {% for post in posts %}
+    <li><h2>{{ post.title }}</h2>{{ post.body|safe }}<br />{{ post.pub_date }}<br /><a href=/reply>reply</a>
+    {% else %}
+    <li><em>Unbelievable! No posts here so far.</em>
+    {% endfor %}
+</ul>
+<form action="{{ url_for('add_reply') }}" method=post class=add_reply>
+    <dl>
+        <dt>Add a reply: </dt>
+        <dd><textarea name=text rows=1 cols=40></textarea>
+        <dd><input type=submit value=comment>
+    </dl>
+</form>
+<ul class=replies>
+    {% for reply in replies %}
+    <li>{{ reply.comment|safe }}<br />{{ reply.pub_date }}
+    {% else %}
+    <li><em>No reply here.</em>
+    {% endfor %}
+{% endblock %}
