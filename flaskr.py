@@ -74,12 +74,11 @@ def add_post():
     return redirect(url_for('show_posts'))
 
 # Reply to a post
-@app.route('/reply', methods = ['POST'])
-def add_reply():
+@app.route('/reply/<int:post_id>', methods = ['POST'])
+def add_reply(post_id):
     if not session.get('logged_in'):
         abort(401)
-    #post_id = Post('post.id')
-    r = Reply(request.form['text'], 'post_id') # can't get post_id
+    r = Reply(request.form['text'], post_id)
     db.session.add(r)
     db.session.commit()
     flash('New reply was successfully added.')
