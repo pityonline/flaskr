@@ -38,14 +38,14 @@ class Reply(db.Model):
     pub_date = db.Column(db.DateTime)
 
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-    post = db.relationship('Post', backref=db.backref('reply', lazy='dynamic'))
+    post = db.relationship('Post', backref=db.backref('replies', lazy='dynamic'))
 
-    def __init__(self, post, comment, pub_date=None):
+    def __init__(self, comment, post_id, pub_date=None):
         self.comment = comment
         if pub_date is None:
             pub_date = datetime.utcnow()
         self.pub_date = pub_date
-        self.post = post
+        self.post_id = post_id
 
     def __repr__(self):
         return '<Reply %r>' % self.comment
@@ -74,11 +74,12 @@ def add_post():
     return redirect(url_for('show_posts'))
 
 # Reply to a post
-@app.route('/reply', methods = ['POST', 'GET'])
+@app.route('/reply', methods = ['POST'])
 def add_reply():
     if not session.get('logged_in'):
         abort(401)
-    r = Reply(request.form['comment'], p)
+    #post_id = Post('post.id')
+    r = Reply(request.form['text'], 'post_id') # can't get post_id
     db.session.add(r)
     db.session.commit()
     flash('New reply was successfully added.')
