@@ -18,7 +18,7 @@
     <li><em>Unbelievable! No posts here so far.</em>
     {% endfor %}
 </ul>
-<form action="{{ url_for('add_reply') }}" method=post class=add_reply>
+<form action="{{ url_for('add_reply', post_id=post.id) }}" method=post class=add_reply>
     <dl>
         <dt>Add a reply: </dt>
         <dd><textarea name=text rows=1 cols=40></textarea>
