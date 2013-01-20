@@ -56,11 +56,9 @@ db.create_all()
 @app.route('/')
 def show_posts():
     posts = Post.query.all()
-    return render_template('show_posts.html', posts=posts)
+    replies = Reply.query.filter_by(post_id='post_id').all()
 
-def show_replies():
-    replies = Reply.query.all()
-    return render_template('show_posts.html', replies=replies)
+    return render_template('show_posts.html', posts=posts, replies=replies)
 
 # Post a entry
 @app.route('/post', methods = ['POST'])
