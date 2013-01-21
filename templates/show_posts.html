@@ -22,7 +22,7 @@
     </dl>
 </form>
     <ul class=replies>
-    {% for reply in replies %}
+    {% for reply in post.replies %}
     <li>{{ reply.comment|safe }}<br />{{ reply.pub_date }}
     {% else %}
     <h3>no reply yet.</h3>
