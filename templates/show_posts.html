@@ -3,9 +3,9 @@
 {% if session.logged_in %}
 <form action="{{ url_for('add_post') }}" method=post class=add_post>
     <dl>
-        <dt>Title: </dt>
+        <dt><h3>Title: </h3></dt>
         <dd><input type=text size=30 name=title>
-        <dt>Text: </dt>
+        <dt><h3>Text: </h3></dt>
         <dd><textarea name=text rows=5 cols=40></textarea>
         <dd><input type=submit value=share>
     </dl>
@@ -16,7 +16,7 @@
     <li><h2><a href="{{ url_for('show_post', post_id=post.id)}}">{{ post.title }}</a></h2>{{ post.body|safe }}<br />{{ post.pub_date }}<br />
 <form action="{{ url_for('add_reply', post_id=post.id) }}" method=post class=add_reply>
     <dl>
-        <dt>Add a reply: </dt>
+        <dt><h3>Add a reply: <h3></dt>
         <dd><textarea name=text rows=1 cols=40></textarea>
         <dd><input type=submit value=comment>
     </dl>
