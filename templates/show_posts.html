@@ -25,7 +25,7 @@
     {% for reply in post.replies %}
     <li>{{ reply.comment|safe }}<br />{{ reply.pub_date }}
     {% else %}
-    <h3>no reply yet.</h3>
+    <h3>No reply to this post yet.</h3>
     {% endfor %}
 </ul>
     {% endfor %}
