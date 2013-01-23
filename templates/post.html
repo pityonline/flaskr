@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{# if session.logged_in #}
+{% block body %}
+<ul class=post>
+    {% if post %}
+    <li><h2>{{ post.title }}</h2>{{ post.body|safe }}<br />{{ post.pub_date }}
+<form action="{{ url_for('add_reply', post_id=post.id) }}" method=post class=add_reply>
+    <dl>
+        <dt><h3>Add a reply: </h3></dt>
+        <dd><textarea name=text rows=1 cols=40></textarea>
+        <dd><input type=submit value=comment>
+    </dl>
+</form>
+</ul>
+    <ul>
+    {% for reply in post.replies %}
+    <li>{{ reply.comment|safe }}<br />{{ reply.pub_date }}
+    {% endfor %}
+    {% else %}
+    <h2>No reply to this post yet.</h2>
+    {% endif %}
+</ul>
+{% endblock %}
