@@ -71,6 +71,13 @@ def add_post():
     flash('New post was successfully added.')
     return redirect(url_for('show_posts'))
 
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    if not session.get('logged_in'):
+        abort(401)
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', post=post)
+
 # Reply to a post
 @app.route('/reply/<int:post_id>', methods = ['POST'])
 def add_reply(post_id):
